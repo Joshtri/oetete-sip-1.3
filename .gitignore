@@ -1,0 +1,6 @@
+node_modules
+.env.development
+.env.production
+data_csv
+erd
+db_kel_oetete.sql

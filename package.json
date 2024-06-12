@@ -1,0 +1,30 @@
+{
+  "name": "admin-oetete-v1.2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Joshtri/Admin-Oetete-V1.2.git",
+  "author": "Joshtri <stuffofyos1516@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "method-override": "^3.0.0",
+    "mysql2": "^3.10.0",
+    "path": "^0.12.7",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "eslint": "9.x",
+    "globals": "^15.3.0",
+    "nodemon": "^3.1.3"
+  }
+}

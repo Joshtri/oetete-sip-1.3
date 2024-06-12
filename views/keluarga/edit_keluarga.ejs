@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | SIP Oetete</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- start navbar header -->
+    <%- include('partials/header'); %>
+    <!-- end navbar header -->
+    
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb" class="small">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
+                <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
+                <li class="breadcrumb-item">Data Keluarga</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Kartu Keluarga</li>
+            </ol>
+        </nav>
+        <hr>
+        <div class="mb-3">
+            <h4>Edit Kartu Keluarga</h4>
+            <p class="fw-semibold mb-1">Kepala Keluarga : <%= keluargaEdit.nama_kepala_keluarga %> </p>
+            <p class="fw-semibold mb-1">Data dibuat : <%= new Date(keluargaEdit.createdAt).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></p>
+            <p class="fw-semibold mb-1">Data diperbarui : <%= new Date(keluargaEdit.updatedAt).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></p>
+        </div>
+
+        <a href="#" class="btn btn-primary btn-sm" onclick="history.back()">Kembali</a> <!-- Tombol kembali -->
+
+        <!-- Form untuk update data keluarga -->
+        <form action="/adm/data/keluarga/<%= keluargaEdit.id_keluarga %>?_method=PUT" method="POST" class="row mt-2">
+            <!-- Tambahkan method spoofing untuk PUT -->
+            <input type="hidden" name="_method" value="PUT">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3 col-lg-10">
+                            <label for="nama_kepala_keluarga" class="form-label">Nama Kepala Keluarga</label>
+                            <input type="text" class="form-control" id="nama_kepala_keluarga" value="<%= keluargaEdit.nama_kepala_keluarga %>" name="nama_kepala_keluarga" required>
+                        </div>
+                        <div class="mb-3 col-lg-10">
+                            <label for="nomor_kartu_keluarga" class="form-label">Nomor Kartu Keluarga</label>
+                            <input type="number" class="form-control" id="nomor_kartu_keluarga" value="<%= keluargaEdit.nomor_kartu_keluarga %>" name="nomor_kartu_keluarga" required>
+                        </div>
+                        <div class="mb-3 col-lg-10">
+                            <label for="alamat_kartu_keluarga" class="form-label">Alamat Kartu Keluarga</label>
+                            <input type="text" class="form-control" id="alamat_kartu_keluarga" value="<%= keluargaEdit.alamat_kartu_keluarga %>" name="alamat_kartu_keluarga" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3 col-lg-10">
+                            <label for="rt_kk" class="form-label">RT</label>
+                            <input type="number" class="form-control" id="rt_kk" value="<%= keluargaEdit.rt_kk %>" name="rt_kk" required>
+                        </div>
+                        <div class="mb-3 col-lg-10">
+                            <label for="rw_kk" class="form-label">RW</label>
+                            <input type="number" class="form-control" id="rw_kk" value="<%= keluargaEdit.rw_kk %>" name="rw_kk" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3 text-center">
+                <button type="submit" class="btn btn-sm btn-primary">Update Data</button>
+            </div>
+        </form>
+        
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
+</body>
+</html>

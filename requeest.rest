@@ -1,0 +1,3 @@
+# Menguji mendapatkan anggota keluarga berdasarkan keluargaId
+GET http://localhost:3001/adm/data/anggota_keluarga/4
+Content-Type: application/json

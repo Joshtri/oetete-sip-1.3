@@ -1,0 +1,50 @@
+<div class="modal fade" id="tambahKelahiranModal" tabindex="-1" aria-labelledby="tambahKKModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahKKModalLabel">Tambah Keluar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/adm/data/post_keluar" method="POST">
+                    
+                    <div class="mb-3">
+                        <label for="namaKepalaKeluarga" class="form-label">Nama Warga yang Keluar</label>
+                        <select class="form-select" id="nama_wargaId" name="nama_wargaId" required>
+                            <option value="">-</option>
+                            <% for(let i = 0; i < wargaData.length; i++) { %>
+                                <option value="<%= wargaData[i].id_warga %>"><%= wargaData[i].nama_warga %> - <%= wargaData[i].nomor_induk_kependudukan %></option>
+                            <% } %>
+                        </select>                    
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="namaKepalaKeluarga" class="form-label">Keluarga dari</label>
+                        <select class="form-select" id="nama_kepala_keluargaId" name="nama_kepala_keluargaId" required>
+                            <option value="">-</option>
+                            <% for(let i = 0; i < keluargaData.length; i++) { %>
+                                <option value="<%= keluargaData[i].id_keluarga %>"><%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %></option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kelahiran" class="form-label">Tanggal Keluar</label>
+                        <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="namaKepalaKeluarga" class="form-label">Alasan Keluar</label>
+                        <input type="text" class="form-control" name="alasan_keluar" id="alasan_keluar" placeholder="Alasan Keluar ">
+                    </div>
+                    <!-- Add more fields as needed -->
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
