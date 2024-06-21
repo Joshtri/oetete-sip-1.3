@@ -1,0 +1,23 @@
+<form id="wargaForm" action="/adm/data/post_masuk" method="POST">
+    <div class="mb-3">
+        <label for="nama_warga" class="form-label">Nama Warga</label>
+        <input type="text" class="form-control" id="nama_warga" name="nama_warga" value="<%= wargaAdd.nama_warga %>" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="nomor_induk_kependudukan" class="form-label">NIK</label>
+        <input type="text" class="form-control" id="nama_kepala_keluarga" name="nama_kepala_keluarga" value="<%= wargaAdd.Keluarga.nama_kepala_keluarga %>" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="kelahiran" class="form-label">Kelahiran</label>
+        <input type="text" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="<%= new Date(wargaAdd.kelahiran).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) %>" readonly>
+    </div>
+    <!-- Add other fields as necessary -->
+
+    <div class="mb-3">
+        <label for="alamat_sebelumnya" class="form-label">Alamat Sebelumnya</label>
+        <input type="text" class="form-control" id="alamat_sebelumnya" name="alamat_sebelumnya" required>
+    </div>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Upload</button>
+
+</form>

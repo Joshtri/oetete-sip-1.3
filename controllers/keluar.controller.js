@@ -16,7 +16,7 @@ export const keluarPage = async (req, res) => {
         const keluargaData = await KeluargaService.getAll();
         const wargaData = await WargaService.getAll();
         const { data: keluarData, total, page: currentPage, pages: totalPages } = await KeluarService.getAllKeluar(page, limit);
-        const messageDeleteSuccess = await req.flash('messageDeleteSuccess');
+        // const messageDeleteSuccess = await req.flash('messageDeleteSuccess');
 
         // Check if nama_wargaId exists in Warga table and if status_warga is "hidup"
         for (const keluar of keluarData) {
@@ -24,7 +24,11 @@ export const keluarPage = async (req, res) => {
             keluar.namaWargaIdExists = namaWargaIdExists; // Add a property to indicate if nama_wargaId exists in Warga table with status "hidup"
         }
 
-        const messageCreate = await req.flash('MessageCreate');
+        // const messageCreate = await req.flash('MessageCreate');
+
+        const messageCreateSuccess = await req.flash('messageCreateSuccess');
+        const messageDeleteSuccess = await req.flash('messageDeleteSuccess');
+        const messageUpdateSuccess = await req.flash('messageUpdateSuccess');
 
         res.render('data_keluar', {
             title,
@@ -34,8 +38,9 @@ export const keluarPage = async (req, res) => {
             currentPage,
             totalPages,
             totalItems: total,
-            messageCreate,
+            messageCreateSuccess,
             messageDeleteSuccess,
+            messageUpdateSuccess,
             limit
         });
     } catch (error) {
@@ -67,7 +72,9 @@ export const createKeluar = async (req,res)=>{
     try {
         const keluarData = req.body;
         const newKeluar = await KeluarService.createKeluar(keluarData);
-        
+
+        await req.flash('messageCreateSuccess', 'Data keluar berhasil ditambahkan, mohon mengubah status warga tersebut untuk keluar');
+
         res.redirect('/adm/data/keluar');
     } catch (error) {
         throw error;
@@ -98,19 +105,57 @@ export const updateStatusWargaToKeluarController = async (req, res) => {
         if (result[0] === 0) {
             return res.status(404).json({ message: 'Warga not found' });
         }
-        res.status(200).json({ message: 'Status warga updated to keluar successfully' });
+
+        await req.flash('messageUpdateWargaToKeluarSuccess', 'Data warga berhasil diubah menjadi status keluar, data tidak ada lagi pada data warga');
+        // res.status(200).json({ message: 'Status warga updated to keluar successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Failed to update status warga', error: error.message });
     }
 };
 
-// export const getKeluarByIdEdit = async (req, res) => {
-//     try {
-//         const id_kematian = req.params.id;
-//         const title = "Edit Kematian";
-//         const kematianEdit = await KematianService.getKematianById(id_kematian);
-//         res.render('edit_kematian', { kematianEdit, title }); // Mengirim data keluargaDetail ke view
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
+export const getKeluarByIdEdit = async (req, res) => {
+    try {
+        const id_keluar = req.params.id;
+        const title = "Edit Keluar";
+        const keluargaData = await KeluargaService.getAll();
+        const keluarEdit = await KeluarService.getKeluarById(id_keluar);
+        const wargaData = await WargaService.getAll();
+
+        res.render('edit_keluar', { 
+            keluarEdit, 
+            title,
+            keluargaData,
+            wargaData
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getKeluarById = async (req, res) => {
+    try {
+        const id_keluar = req.params.id;
+        const title = "Detail Keluar";
+
+        const keluarDetail = await KeluarService.getKeluarById(id_keluar);
+        res.render('detail_keluar', { keluarDetail, title }); 
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Controller untuk memperbarui data kelahiran berdasarkan id
+export const updateKeluar = async (req, res) => {
+    const { id_keluar } = req.params;
+    const updateData = req.body;
+  
+    try {
+      const updatedKeluar = await KeluarService.modifyKeluar(id_keluar, updateData);
+      // res.status(200).json(updatedKeluarga);
+  
+      await req.flash('messageUpdateSuccess', 'Data keluar berhasil di Update');
+      res.redirect('/adm/data/keluar');
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+};

@@ -101,3 +101,27 @@ export const checkWargaIdExists = async (nama_wargaId) => {
         throw error;
     }
 };
+
+
+
+export const modifyWarga = async (id_warga, updateData) => {
+    try {
+      const updatedWarga = await WargaRepository.updateWarga(id_warga, updateData);
+      if (!updatedWarga) {
+        throw new Error('Warga not found');
+      }
+      return updatedWarga;
+    } catch (error) {
+      throw new Error(`Error while updating warga: ${error.message}`);
+    }
+};
+
+
+// Service untuk mengecek apakah nama ada di tabel Warga
+export const checkNamaExists = async (nama) => {
+    try {
+        return await WargaRepository.checkWargaExists(nama);
+    } catch (error) {
+        throw error;
+    }
+};

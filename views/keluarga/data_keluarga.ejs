@@ -25,40 +25,67 @@
     <div class="container mt-3">
       <nav aria-label="breadcrumb" class="small">
           <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="/adm/dashboard"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
               <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
               <li class="breadcrumb-item active" aria-current="page"><%= title %></li>
           </ol>
       </nav>
       <hr>
-      <style>
-          .alert-container {
-            position: fixed;
-            left: 50%;
-            transform: translateX(-50%);
 
-          }
-      </style>
-
-
-      <% messageCreate.forEach(element => { %>
-          <div class="alert-container">
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-              <%= element %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
+      <!-- toast tambah data berhasil. -->
+      <% messageCreateSuccess.forEach(element => { %>
+      <div class="toast-container top-0 end-0 p-3">
+        <!-- Then put toasts within -->
+        <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <div class="custom-avatar rounded me-2"></div>
+            <strong class="me-auto">Notifikasi</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
+          <div class="toast-body">
+            <%= element %>
+          </div>
+        </div>
+      </div>
       <% }) %>
 
       <% messageDeleteSuccess.forEach(element => { %>
-        <div class="alert-container">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <!-- toast edit data berhasil. -->
+      <div class="toast-container top-0 end-0 p-3">
+        <!-- Then put toasts within -->
+        <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <div class="custom-avatar rounded me-2"></div>
+            <strong class="me-auto">Notifikasi</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
             <%= element %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+          </div>
         </div>
+      </div>
       <% }) %>
 
+
+      <% messageUpdateSuccess.forEach(element => { %>
+      <!-- toast edit data berhasil. -->
+      <div class="toast-container top-0 end-0 p-3">
+        <!-- Then put toasts within -->
+        <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <div class="custom-avatar rounded me-2"></div>
+            <strong class="me-auto">Notifikasi</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <%= element %>
+          </div>
+        </div>
+      </div>
+      <% }) %>
       
       <div class="d-flex justify-content-between">
           <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#tambahKKModal">Tambah Data</button>

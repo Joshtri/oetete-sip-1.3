@@ -21,16 +21,83 @@
         }
     </style>
 
+    <style>
+      .custom-avatar {
+      width: 20px; /* Adjust the width as needed */
+      height: 20px; /* Adjust the height as needed */
+      background-color: rgb(45, 118, 196);
+      border-radius: 3px; /* Add border-radius for rounded corners if needed */
+    }
+    </style>
+
 
     <div class="container mt-3">
         <nav aria-label="breadcrumb" class="small">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/adm/dashboard"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
                 <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
                 <li class="breadcrumb-item active" aria-current="page"><%= title %></li>
             </ol>
         </nav>
         <hr>
+
+
+        <!-- toast tambah data berhasil. -->
+        <% messageCreateSuccess.forEach(element => { %>
+        <div class="toast-container top-0 end-0 p-3">
+          <!-- Then put toasts within -->
+          <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <div class="custom-avatar rounded me-2"></div>
+              <strong class="me-auto">Notifikasi</strong>
+              <small class="text-body-secondary">just now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              <%= element %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+
+
+        <% messageDeleteSuccess.forEach(element => { %>
+        <!-- toast edit data berhasil. -->
+        <div class="toast-container top-0 end-0 p-3">
+          <!-- Then put toasts within -->
+          <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <div class="custom-avatar rounded me-2"></div>
+              <strong class="me-auto">Notifikasi</strong>
+              <small class="text-body-secondary">just now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              <%= element %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+
+
+        <% messageUpdateSuccess.forEach(element => { %>
+        <!-- toast edit data berhasil. -->
+        <div class="toast-container top-0 end-0 p-3">
+          <!-- Then put toasts within -->
+          <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <div class="custom-avatar rounded me-2"></div>
+              <strong class="me-auto">Notifikasi</strong>
+              <small class="text-body-secondary">just now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              <%= element %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+
 
         <div class="d-flex justify-content-between">
             <a href="/adm/data/add_warga" class="btn btn-sm btn-warning">Tambah Data</a>
@@ -71,6 +138,11 @@
                             <a class="btn btn-light btn-sm delete-btn" data-id="<%= item.id_warga %>">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
+
+                            <% if (!item.namaWargaExists) { %>
+                              <a href="#" class="btn btn-primary btn-sm add-to-masuk-btn" data-id_warga="<%= item.id_warga %>" data-bs-toggle="tooltip" data-bs-title="tambah ke daftar masuk"><i class="fa-solid fa-user-plus fa-bounce"></i></a>
+                            <% } %>
+                          
     
                         </td>
                     </tr>
@@ -132,6 +204,23 @@
     <%-include('keluarga/add_keluarga'); %>
 
 
+    <!-- Modal Structure -->
+  <div class="modal fade" id="addToMasukModal" tabindex="-1" aria-labelledby="addToMasukModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addToMasukModalLabel">Tambah ke Daftar Masuk</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="modalContent">
+                  <!-- Content to be populated dynamically -->
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -152,6 +241,40 @@
     </script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.add-to-masuk-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const id_warga = this.getAttribute('data-id_warga');
+
+                axios.get(`/adm/data/add_to_masuk/${id_warga}`)
+                .then(response => {
+                    // Populate the modal with the rendered HTML
+                    document.getElementById('modalContent').innerHTML = response.data;
+
+                    // Show the modal
+                    const modal = new bootstrap.Modal(document.getElementById('addToMasukModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Failed to fetch data. Please try again.');
+                });
+            });
+        });
+
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            alert('Upload logic to be implemented.');
+        });
+    });
+</script>
+
+    <script src="/js/tooltip.js"></script>
 
 </body>
 </html>

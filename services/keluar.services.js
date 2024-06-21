@@ -63,3 +63,27 @@ export const updateStatusWargaToKeluar = async (id_warga) => {
         throw error;
     }
 };
+
+
+export const getKeluarById = async(id_keluar)=>{
+    try {
+      const keluarDetail = await KeluarRepository.getKeluarById(id_keluar);
+      return keluarDetail;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+
+
+export const modifyKeluar = async (id_keluar, updateData) => {
+    try {
+      const updatedKeluar = await KeluarRepository.updateKeluar(id_keluar, updateData);
+      if (!updatedKeluar) {
+        throw new Error('Keluar not found');
+      }
+      return updatedKeluar;
+    } catch (error) {
+      throw new Error(`Error while updating Keluar: ${error.message}`);
+    }
+};

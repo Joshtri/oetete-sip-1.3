@@ -36,18 +36,33 @@
         <a href="#" class="btn btn-primary btn-sm" onclick="history.back()">Kembali</a> <!-- Tombol kembali -->
 
         
+        <!-- Form untuk update data keluarga -->
+        <form action="/adm/data/edit_kematian/<%= kematianEdit.id_kematian %>?_method=PUT" method="POST" class="row mt-2">
+        <!-- Tambahkan method spoofing untuk PUT -->
+        <input type="hidden" name="_method" value="PUT">
+
         <div class="row mt-2">
             <div class="col-lg-6">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
+                        
                         <div class="mb-3 col-lg-10">
                             <label for="nama_warga" class="form-label">Nama Warga</label>
-                            <input type="text" class="form-control" id="nama_warga" value="<%= kematianEdit.Warga.nama_warga %>" name="nama_warga" required>
+                            <select name="namaWargaId" class="form-select" id="namaWargaId" required>
+                                <option value="">-</option>
+                                <% for(let i = 0; i < wargaData.length; i++) { %>
+                                  <option value="<%= wargaData[i].id_warga %>" 
+                                          <%= kematianEdit && kematianEdit.Warga && kematianEdit.Warga.nama_warga === wargaData[i].nama_warga ? 'selected' : '' %>>
+                                    <%= wargaData[i].nama_warga %> - <%= wargaData[i].nomor_induk_kependudukan %>
+                                  </option>
+                                <% } %>
+                            </select>
+                              
                         </div>
 
                         <div class="mb-3 col-lg-10">
-                            <label for="nama_warga" class="form-label">Penyebab Kematian</label>
-                            <input type="text" class="form-control" id="nama_warga" value="<%= kematianEdit.penyebab_kematian %>" name="nama_warga" required>
+                            <label for="penyebab_kematian" class="form-label">Penyebab Kematian</label>
+                            <input type="text" class="form-control" id="penyebab_kematian" value="<%= kematianEdit.penyebab_kematian %>" name="penyebab_kematian" required>
                         </div>
 
 
@@ -60,13 +75,13 @@
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <div class="mb-3 col-lg-10">
-                            <label for="nama_warga" class="form-label">Tempat Wafat</label>
-                            <input type="text" class="form-control" id="nama_warga" value="<%= kematianEdit.tempat_kematian %>" name="nama_warga" required>
+                            <label for="tempat_kematian" class="form-label">Tempat Wafat</label>
+                            <input type="text" class="form-control" id="tempat_kematian" value="<%= kematianEdit.tempat_kematian %>" name="tempat_kematian" required>
                         </div>
 
                         <div class="mb-3 col-lg-10">
-                            <label for="nama_warga" class="form-label">Tanggal Kematian</label>
-                            <input type="text" class="form-control" id="nama_warga" value="<%= new Date(kematianEdit.tanggal_kematian).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) %>" name="nama_warga" required>
+                            <label for="tanggal_kematian" class="form-label">Tanggal Kematian</label>
+                            <input type="text" class="form-control" id="tanggal_kematian" value="<%= new Date(kematianEdit.tanggal_kematian).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) %>" name="tanggal_kematian" required>
                         </div>
                     </div>
 
@@ -77,6 +92,8 @@
                 <button type="submit" class="btn btn-sm btn-primary">Update Data</button>
             </div>
         </div>
+        </form>
+        
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

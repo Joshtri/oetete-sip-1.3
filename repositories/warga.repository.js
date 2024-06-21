@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-catch */
 import Warga from "../models/warga.model.js";
 import Keluarga from "../models/keluarga.model.js";
-
+import Masuk from '../models/masuk.model.js';
 
 // Fungsi untuk menambahkan mahasiswa baru (contoh tambahan)
 export const createWarga = async (wargaData) => {
@@ -46,20 +46,21 @@ export const getTotalWarga = async () => {
 };
 
 
-// Fungsi untuk memeriksa apakah nomor kartu keluarga ada dalam tabel Warga
 export const findWargaByNomorKartuKeluarga = async (nomorKartuKeluarga) => {
-    try {
-        const warga = await Warga.findOne({
-            include: [{
-                model: Keluarga,
-                where: { nomor_kartu_keluarga: nomorKartuKeluarga }
-            }]
-        });
-        return warga;
-    } catch (error) {
-        throw error;
-    }
+  try {
+      const warga = await Warga.findOne({
+          include: [{
+              model: Keluarga,
+              where: { nomor_kartu_keluarga: nomorKartuKeluarga }
+          }],
+          where: { status_warga: 'hidup' }
+      });
+      return warga;
+  } catch (error) { 
+      throw error;
+  }
 };
+
 
 
 export const deleteWarga = async(id_warga)=>{
@@ -216,4 +217,37 @@ export const getStatusPerkawinanStatistics = async (_, res) => {
       res.status(500).json({ message: error.message });
     }
 };
+
+// Fungsi untuk memperbarui data warga berdasarkan id
+export const updateWarga = async (id_warga, updateData) => {
+    try {
+      const [updatedRows] = await Warga.update(updateData, {
+        where: { id_warga }
+      });
   
+      if (updatedRows === 0) {
+        return null;
+      }
+  
+      const updatedWarga = await Warga.findByPk(id_warga);
+      return updatedWarga;
+    } catch (error) {
+      throw error;
+    }
+};
+
+
+// Function to check if a nama warga exist on table masuk
+export const checkWargaExists = async (nama) => {
+  try {
+      const warga = await Masuk.findOne({
+        where: {
+          nama_warga: nama,
+          // status_warga: 'hidup'
+        }
+      });
+      return !!warga; // Return true if warga is found with status "hidup", otherwise false
+  } catch (error) {
+      throw error;
+  }
+};

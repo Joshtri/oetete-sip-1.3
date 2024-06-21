@@ -52,13 +52,29 @@
 
                         <div class="mb-3 col-lg-10">
                             <label for="nama_warga" class="form-label">Keluarga Dari</label>
-                            <input type="text" class="form-control" id="jenis_kelamin" value="<%= wargaEdit.Keluarga.nama_kepala_keluarga %>" name="jenis_kelamin" required>
+                            
+                            <select class="form-select" id="keluargaId" name="keluargaId" required>
+                              <option value="">-</option>
+                              <% for(let i = 0; i < keluargaData.length; i++) { %>
+                              <option value="<%= keluargaData[i].id_keluarga %>" <%= wargaEdit && wargaEdit.Keluarga && wargaEdit.Keluarga.nama_kepala_keluarga === keluargaData[i].nama_kepala_keluarga ? 'selected' : '' %>>
+                                <%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %>
+                              </option>
+                              <% } %>
+                            </select>
                         </div>
+
 
                         <div class="mb-3 col-lg-10">
                             <label for="status_perkawinan" class="form-label">Status Perkawinan</label>
-                            <input type="text" class="form-control" id="status_perkawinan" value="<%= wargaEdit.status_perkawinan %>" name="status_perkawinan" required>
+                            <select class="form-select" id="status_perkawinan" name="status_perkawinan" required>
+                              <option value="">-</option>
+                              <option value="Belum Menikah" <%= wargaEdit && wargaEdit.status_perkawinan === 'Belum Menikah' ? 'selected' : '' %>>Belum Menikah</option>
+                              <option value="Sudah Menikah" <%= wargaEdit && wargaEdit.status_perkawinan === 'Sudah Menikah' ? 'selected' : '' %>>Sudah Menikah</option>
+                              <option value="Cerai Hidup" <%= wargaEdit && wargaEdit.status_perkawinan === 'Cerai Hidup' ? 'selected' : '' %>>Cerai Hidup</option>
+                              <option value="Cerai Mati" <%= wargaEdit && wargaEdit.status_perkawinan === 'Cerai Mati' ? 'selected' : '' %>>Cerai Mati</option>
+                            </select>
                         </div>
+                          
 
                     </div>
 
@@ -70,9 +86,14 @@
                     <div class="card-body">
 
                         <div class="mb-3 col-lg-10">
-                            <label for="nama_warga" class="form-label">Jenis Kelamin</label>
-                            <input type="text" class="form-control" id="jenis_kelamin" value="<%= wargaEdit.jenis_kelamin %>" name="jenis_kelamin" required>
+                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                            <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
+                              <option value="">-</option>
+                              <option value="Laki-laki" <%= wargaEdit && wargaEdit.jenis_kelamin === 'Laki-laki' ? 'selected' : '' %>>Laki-laki</option>
+                              <option value="Perempuan" <%= wargaEdit && wargaEdit.jenis_kelamin === 'Perempuan' ? 'selected' : '' %>>Perempuan</option>
+                            </select>
                         </div>
+                          
 
 
                         <div class="mb-3 col-lg-10">
@@ -82,13 +103,42 @@
 
                         <div class="mb-3 col-lg-10">
                             <label for="pendidikan" class="form-label">Pendidikan</label>
-                            <input type="text" class="form-control" id="pendidikan" value="<%= wargaEdit.pendidikan %>" name="pendidikan" required>
-                        </div>
+                            <select class="form-select" id="pendidikan" name="pendidikan" required>
+                              <option value="">-</option>
+                              <option value="Belum/Tidak Pernah Sekolah" <%= wargaEdit && wargaEdit.pendidikan === 'Belum/Tidak Pernah Sekolah' ? 'selected' : '' %>>Belum/Tidak Pernah Sekolah</option>
+                              <option value="Belum/Tidak Tamat SD/SDLB/MI/Paket A" <%= wargaEdit && wargaEdit.pendidikan === 'Belum/Tidak Tamat SD/SDLB/MI/Paket A' ? 'selected' : '' %>>Belum/Tidak Tamat SD/SDLB/MI/Paket A</option>
+                              <option value="SD/SDLB/MI/Paket A" <%= wargaEdit && wargaEdit.pendidikan === 'SD/SDLB/MI/Paket A' ? 'selected' : '' %>>SD/SDLB/MI/Paket A</option>
+                              <option value="SMP/SMPLB/MTs/Paket B" <%= wargaEdit && wargaEdit.pendidikan === 'SMP/SMPLB/MTs/Paket B' ? 'selected' : '' %>>SMP/SMPLB/MTs/Paket B</option>
+                              <option value="SMA/SMLB/MA/SMK/MAK/paket C" <%= wargaEdit && wargaEdit.pendidikan === 'SMA/SMLB/MA/SMK/MAK/paket C' ? 'selected' : '' %>>SMA/SMLB/MA/SMK/MAK/paket C</option>
+                              <option value="DI/DII/DIII" <%= wargaEdit && wargaEdit.pendidikan === 'DI/DII/DIII' ? 'selected' : '' %>>DI/DII/DIII</option>
+                              <option value="DIV/S1" <%= wargaEdit && wargaEdit.pendidikan === 'DIV/S1' ? 'selected' : '' %>>DIV/S1</option>
+                              <option value="S2" <%= wargaEdit && wargaEdit.pendidikan === 'S2' ? 'selected' : '' %>>S2</option>
+                              <option value="S3" <%= wargaEdit && wargaEdit.pendidikan === 'S3' ? 'selected' : '' %>>S3</option>
+                            </select>
+                          </div>
+                          
 
                         <div class="mb-3 col-lg-10">
                             <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                            <input type="text" class="form-control" id="pekerjaan" value="<%= wargaEdit.pekerjaan %>" name="pekerjaan" required>
-                        </div>
+                            <select class="form-select" id="pekerjaan" name="pekerjaan" required>
+                              <option value="">-</option>
+                              <option value="Belum Bekerja" <%= wargaEdit && wargaEdit.pekerjaan === 'Belum Bekerja' ? 'selected' : '' %>>Belum Bekerja</option>
+                              <option value="Mengurus Rumah Tangga" <%= wargaEdit && wargaEdit.pekerjaan === 'Mengurus Rumah Tangga' ? 'selected' : '' %>>Mengurus Rumah Tangga</option>
+                              <option value="Pelajar/Mahasiswa" <%= wargaEdit && wargaEdit.pekerjaan === 'Pelajar/Mahasiswa' ? 'selected' : '' %>>Pelajar/Mahasiswa</option>
+                              <option value="Pensiunan" <%= wargaEdit && wargaEdit.pekerjaan === 'Pensiunan' ? 'selected' : '' %>>Pensiunan</option>
+                              <option value="PNS" <%= wargaEdit && wargaEdit.pekerjaan === 'PNS' ? 'selected' : '' %>>PNS</option>
+                              <option value="POLRI" <%= wargaEdit && wargaEdit.pekerjaan === 'POLRI' ? 'selected' : '' %>>POLRI</option>
+                              <option value="TNI" <%= wargaEdit && wargaEdit.pekerjaan === 'TNI' ? 'selected' : '' %>>TNI</option>
+                              <option value="WIRASWASTA" <%= wargaEdit && wargaEdit.pekerjaan === 'WIRASWASTA' ? 'selected' : '' %>>WIRASWASTA</option>
+                              <option value="SWASTA" <%= wargaEdit && wargaEdit.pekerjaan === 'SWASTA' ? 'selected' : '' %>>SWASTA</option>
+                              <option value="Pegawai BUMN" <%= wargaEdit && wargaEdit.pekerjaan === 'Pegawai BUMN' ? 'selected' : '' %>>Pegawai BUMN</option>
+                              <option value="Pekerja Lepas" <%= wargaEdit && wargaEdit.pekerjaan === 'Pekerja Lepas' ? 'selected' : '' %>>Pekerja Lepas</option>
+                              <option value="Petani/peternak/pekebun" <%= wargaEdit && wargaEdit.pekerjaan === 'Petani/peternak/pekebun' ? 'selected' : '' %>>Petani/peternak/pekebun</option>
+                              <option value="Nelayan" <%= wargaEdit && wargaEdit.pekerjaan === 'Nelayan' ? 'selected' : '' %>>Nelayan</option>
+                              <option value="Industri" <%= wargaEdit && wargaEdit.pekerjaan === 'Industri' ? 'selected' : '' %>>Industri</option>
+                            </select>
+                          </div>
+                          
                     </div>
 
                 </div>

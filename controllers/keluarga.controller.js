@@ -9,7 +9,7 @@ export const createKeluargaController = async (req, res) => {
     const keluargaData = req.body;
     const newKeluarga = await KeluargaService.createKeluarga(keluargaData);
     // res.status(201).json(newKeluarga);
-    await req.flash('MessageCreate', `Data Keluarga dari Kepala Keluarga ${newKeluarga.nama_kepala_keluarga} berhasil dibuat`);
+    await req.flash('messageCreateSuccess', `Data Keluarga dari Kepala Keluarga ${newKeluarga.nama_kepala_keluarga} berhasil dibuat`);
 
     res.redirect('/adm/data/kartu_keluarga');
   } catch (error) {
@@ -36,8 +36,9 @@ export const keluargaPage = async (req, res) => {
           // console.log(`Nomor Kartu Keluarga ${keluarga.nomor_kartu_keluarga} ${nomorKartuKeluargaExist ? 'exists' : 'does not exist'} in Warga table`);
       }
 
-      const messageCreate = await req.flash('MessageCreate');
+      const messageCreateSuccess = await req.flash('messageCreateSuccess');
       const messageDeleteSuccess = await req.flash('messageDeleteSuccess');
+      const messageUpdateSuccess = await req.flash('messageUpdateSuccess');
 
       res.render('data_keluarga', {
           title,
@@ -45,8 +46,9 @@ export const keluargaPage = async (req, res) => {
           currentPage,
           totalPages,
           totalItems: total,
-          messageCreate,
+          messageCreateSuccess,
           messageDeleteSuccess,
+          messageUpdateSuccess,
           limit
       });
   } catch (error) {
@@ -128,6 +130,7 @@ export const updateKeluarga = async (req, res) => {
     const updatedKeluarga = await KeluargaService.modifyKeluarga(id_keluarga, updateData);
     // res.status(200).json(updatedKeluarga);
 
+    await req.flash('messageUpdateSuccess','Data Keluarga Diupdate');
     res.redirect('/adm/data/kartu_keluarga');
   } catch (error) {
     res.status(500).json({ message: error.message });

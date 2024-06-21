@@ -6,11 +6,17 @@ import flash from 'connect-flash';
 import { config } from 'dotenv';
 import session from 'express-session';
 import methodOverride from 'method-override';
+import mongoose from 'mongoose';
 // import mysql from 'mysql';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+
+import mongoDbConnect from './config/dbSessionConfig.js';
+
 config();
+
+mongoDbConnect();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -92,3 +92,24 @@ export const checkWargaIdExists = async (nama_wargaId) => {
         throw error;
     }
 };
+
+
+
+// Fungsi untuk memperbarui data kematian berdasarkan id
+export const updateKematian = async (id_kematian, updateData) => {
+    try {
+      const [updatedRows] = await Kematian.update(updateData, {
+        
+        where: { id_kematian }
+      });
+  
+      if (updatedRows === 0) {
+        return null;
+      }
+  
+      const updatedKematian = await Kematian.findByPk(id_kematian);
+      return updatedKematian;
+    } catch (error) {
+      throw error;
+    }
+};

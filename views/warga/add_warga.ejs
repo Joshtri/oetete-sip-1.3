@@ -45,10 +45,12 @@
                     <div class="row">
                         <div class="mb-3 col-lg-4">
                             <label for="nama_warga" class="form-label">Nama Warga</label>
-                            <input type="text" class="form-control" id="nama_warga" value="<%= kepalaKeluargaData ? (kepalaKeluargaData.nama_kepala_keluarga || '') : '' %>" name="nama_warga" required>
-                            
-                        </div>
-                    
+                            <input type="text" class="form-control" id="nama_warga" 
+                                   value="<%= kepalaKeluargaData ? (kepalaKeluargaData.nama_kepala_keluarga || (namakelahiranData && namakelahiranData.nama) || '') : (namakelahiranData && namakelahiranData.nama) || '' %>" 
+                                   name="nama_warga" required>
+                          </div>
+
+                      
                         <div class="mb-3 col-lg-4">
                             <label for="nomor_induk_kependudukan" class="form-label">Nomor Induk Kependudukan</label>
                             <input type="text" class="form-control" id="nomor_induk_kependudukan" name="nomor_induk_kependudukan" required>
@@ -60,9 +62,17 @@
                             <select name="keluargaId" class="form-select" id="" required>
                                 <option value="">-</option>
                                 <% for(let i = 0; i < keluargaData.length; i++) { %>
-                                    <option value="<%= keluargaData[i].id_keluarga %>" <%= kepalaKeluargaData && kepalaKeluargaData.nama_kepala_keluarga === keluargaData[i].nama_kepala_keluarga ? 'selected' : '' %>><%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %></option>
+                                  <option value="<%= keluargaData[i].id_keluarga %>"
+                                    <%= 
+                                      (kepalaKeluargaData && kepalaKeluargaData.nama_kepala_keluarga === keluargaData[i].nama_kepala_keluarga) || 
+                                      (namakelahiranData && namakelahiranData.nama_kepala_keluargaId === keluargaData[i].id_keluarga) ? 
+                                      'selected' : '' 
+                                    %>>
+                                    <%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %>
+                                  </option>
                                 <% } %>
-                            </select>
+                              </select>
+                              
                             
                             
                         </div>
@@ -81,8 +91,10 @@
 
                         <div class="mb-3 col-lg-4">
                             <label for="kelahiran" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="kelahiran" name="kelahiran" required>
-                        </div>
+                            <input type="date" class="form-control" id="kelahiran" name="kelahiran" 
+                                   value="<%= namakelahiranData && namakelahiranData.tanggal_kelahiran ? namakelahiranData.tanggal_kelahiran.toISOString().substring(0, 10) : '' %>" required>
+                          </div>
+                          
 
                         <div class="mb-3 col-lg-4">
                             <label for="status_perkawinan" class="form-label">Status Perkawinan</label>
@@ -118,6 +130,7 @@
                                 <option value="Industri">Industri</option>
                             </select>
                         </div>
+                        
                         <div class="mb-3 col-lg-4">
                             <label for="pendidikan" class="form-label">Pendidikan</label>
                             <select class="form-select" id="pendidikan" name="pendidikan" required>

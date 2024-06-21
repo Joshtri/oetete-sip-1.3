@@ -50,3 +50,26 @@ export const getKelahiranById = async(id_kelahiran)=>{
     throw error;
   }
 };
+
+
+export const modifyKelahiran = async (id_kelahiran, updateData) => {
+  try {
+    const updatedKelahiran = await KelahiranRepository.updateKelahiran(id_kelahiran, updateData);
+    if (!updatedKelahiran) {
+      throw new Error('Kelahiran not found');
+    }
+    return updatedKelahiran;
+  } catch (error) {
+    throw new Error(`Error while updating kelahiran: ${error.message}`);
+  }
+};
+
+
+// Service untuk mengecek apakah nama ada di tabel Warga
+export const checkNamaExists = async (nama) => {
+  try {
+      return await KelahiranRepository.checkNamaExistsInWarga(nama);
+  } catch (error) {
+      throw error;
+  }
+};

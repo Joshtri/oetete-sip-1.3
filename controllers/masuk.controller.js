@@ -43,4 +43,19 @@ export const deleteMasuk = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
-  
+
+
+export const createMasuk = async (req,res)=>{
+    try {
+        const masukData = req.body;
+        const newKeluarga = await MasukService.createMasuk(masukData);
+        // res.status(201).json(newKeluarga);
+        await req.flash('messageCreateSuccess', `Data warga telah berhasil ditambah ke daftar masuk.`);
+    
+        res.redirect('/adm/data/warga');
+      } catch (error) {
+        res.status(500).json({ message: "Failed to create Masuk", error: error.message });
+      }
+};
+
+

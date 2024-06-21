@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import { config } from "dotenv";
 import envFile from "./envConfig.js";
 import path from 'path';
-
+import mysql2 from 'mysql2';
 
 // Load environment variables from the appropriate .env file
 config({ path: path.resolve(process.cwd(), envFile) }); 

@@ -72,3 +72,16 @@ export const checkKematianWargaIdExists = async (namaWargaId) => {
         throw error;
     }
 };
+
+
+export const modifyKematian = async (id_kematian, updateData) => {
+    try {
+      const updatedKematian = await KematianRepository.updateKematian(id_kematian, updateData);
+      if (!updatedKematian) {
+        throw new Error('Kematian not found');
+      }
+      return updatedKematian;
+    } catch (error) {
+      throw new Error(`Error while updating kematian: ${error.message}`);
+    }
+  };

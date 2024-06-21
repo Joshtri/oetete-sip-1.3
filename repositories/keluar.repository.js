@@ -98,3 +98,49 @@ export const updateStatusWargaToKeluar = async (id_warga) => {
     }
 };
 
+
+// Fungsi untuk mendapatkan detail keluarga berdasarkan id_keluarga
+export const getKeluarById = async (id_keluar) => {
+    try {
+        const keluarDetail = await Keluar.findByPk(id_keluar,{
+            include: [
+                {
+                    model: Warga,
+                    as: 'warga', // Use the alias defined in the model association
+                    attributes: ['nama_warga']
+                },
+                {
+                    model: Keluarga,
+                    as: 'keluarga', // Use the alias defined in the model association
+                    attributes: ['nama_kepala_keluarga']
+                }
+            ],
+        });
+
+
+        return keluarDetail;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+// Fungsi untuk memperbarui data keluar berdasarkan id
+export const updateKeluar = async (id_keluar, updateData) => {
+    try {
+      const [updatedRows] = await Keluar.update(updateData, {
+        where: { id_keluar }
+      });
+  
+      if (updatedRows === 0) {
+        return null;
+      }
+  
+      const updatedKeluar = await Keluar.findByPk(id_keluar);
+      return updatedKeluar;
+    } catch (error) {
+      throw error;
+    }
+};
+
+

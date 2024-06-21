@@ -75,3 +75,14 @@ Keluarga.hasMany(Warga, {foreignKey: `keluargaId`});
 Warga.belongsTo(Keluarga,{foreignKey: `keluargaId`});
 
 export default Warga;
+
+
+// Singkronisasi dengan basis data
+(async () => {
+    try {
+        await db.sync();
+        console.log("warga table has been created.");
+    } catch (error) {
+        console.error("Unable to create the table:", error);
+    }
+})();

@@ -31,3 +31,14 @@ const User = db.define("User", {
 });
 
 export default User;
+
+
+// Singkronisasi dengan basis data
+(async () => {
+    try {
+        await db.sync();
+        console.log("user table has been created.");
+    } catch (error) {
+        console.error("Unable to create the table:", error);
+    }
+})();

@@ -25,7 +25,7 @@
     <div class="container mt-3">
         <nav aria-label="breadcrumb" class="small">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/adm/dashboard"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
                 <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
                 <li class="breadcrumb-item active" aria-current="page"><%= title %></li>
             </ol>
@@ -42,8 +42,8 @@
                 <thead class="table-dark">
                     <tr class="text-center">
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Tanggal Kelahiran</th>
+                        <th>Nama Warga</th>
+                        <th>Tanggal Masuk</th>
                         <th>Nama Kepala Keluarga</th>
                         <!-- <th>Tanggal Audit</th>
                         <th>Penilaian</th>
@@ -55,18 +55,18 @@
                     <% masukData.forEach((item, index) => { %>
                     <tr class="text-center">
                         <td><%= index + 1 %></td>
-                        <td class="text-capitalize"><%= item.nama %></td>
-                        <td><%= new Date(item.tanggal_kelahiran).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) %></td>
-                        <td class="text-capitalize"><%= item.Keluarga.nama_kepala_keluarga %></td>
+                        <td class="text-capitalize"><%= item.nama_warga %></td>
+                        <td><%= new Date(item.tanggal_masuk).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) %></td>
+                        <td class="text-capitalize"><%= item.nama_kepala_keluarga %></td>
                         <!-- <td></td>
                         <td></td>   
                         <td> </td> -->
                         <td>
                             <a class="btn btn-light btn-sm"><i class="fa-regular fa-eye"></i></a>
                             <a class="btn btn-light btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a class="btn btn-light btn-sm delete-btn" data-id="<%= item.id_masuk %>">
+                            <!-- <a class="btn btn-light btn-sm delete-btn" data-id="<%= item.id_masuk %>">
                                 <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            </a> -->
     
                         </td>
                     </tr>

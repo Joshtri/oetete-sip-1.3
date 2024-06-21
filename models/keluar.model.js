@@ -57,3 +57,14 @@ Keluar.belongsTo(Warga, {
 
 
 export default Keluar;
+
+
+// Singkronisasi dengan basis data
+(async () => {
+    try {
+        await db.sync();
+        console.log("keluar table has been created.");
+    } catch (error) {
+        console.error("Unable to create the table:", error);
+    }
+})();

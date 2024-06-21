@@ -46,7 +46,7 @@ export default Kematian;
 (async () => {
     try {
         await db.sync();
-        console.log("kelahiran table has been created.");
+        console.log("kematian table has been created.");
     } catch (error) {
         console.error("Unable to create the table:", error);
     }

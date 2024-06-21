@@ -84,3 +84,41 @@ export const checkWargaIdExists = async (nama ) => {
         throw error;
     }
 };
+
+
+
+// Fungsi untuk memperbarui data kelahiran berdasarkan id
+export const updateKelahiran = async (id_kelahiran, updateData) => {
+    try {
+      const [updatedRows] = await Kelahiran.update(updateData, {
+        where: { id_kelahiran }
+      });
+  
+      if (updatedRows === 0) {
+        return null;
+      }
+  
+      const updatedKelahiran = await Kelahiran.findByPk(id_kelahiran);
+      return updatedKelahiran;
+    } catch (error) {
+      throw error;
+    }
+};
+
+
+// Function to check if a nama_wargaId exists in the Warga table
+export const checkNamaExistsInWarga = async (nama) => {
+    try {
+        const warga = await Warga.findOne({
+            where: {
+                nama_warga: nama,
+                // status_warga: 'hidup'
+            }
+        });
+        return !!warga; // Return true if warga is found with status "hidup", otherwise false
+    } catch (error) {
+        throw error;
+    }
+};
+
+

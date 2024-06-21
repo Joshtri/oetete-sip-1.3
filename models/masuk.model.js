@@ -11,22 +11,16 @@ const Masuk = db.define('Masuk',{
         primaryKey:true,
         allowNull:false
     },
-    nama_kepala_keluargaId:{
-        type:DataTypes.INTEGER,
+    nama_kepala_keluarga:{
+        type:DataTypes.STRING(60),
         allowNull:false,
-        references:{
-            model: Keluarga,
-            key: 'id_keluarga'
-        }
+
     },
 
-    nama_wargaId:{
-        type:DataTypes.INTEGER,
+    nama_warga:{
+        type:DataTypes.STRING(70),
         allowNull:false,
-        references:{
-            model: Warga,
-            key: 'id_warga'
-        }
+
     },
 
     tanggal_masuk:{
@@ -40,17 +34,28 @@ const Masuk = db.define('Masuk',{
     },
 });
 
-// Define associations within this file
-Masuk.belongsTo(Keluarga, {
-    foreignKey: 'nama_kepala_keluargaId',
-    as: 'keluarga'
-});
+// // Define associations within this file
+// Masuk.belongsTo(Keluarga, {
+//     foreignKey: 'nama_kepala_keluargaId',
+//     as: 'keluarga'
+// });
 
-Masuk.belongsTo(Warga, {
-foreignKey: 'nama_wargaId',
-    as: 'warga'
-});
+// Masuk.belongsTo(Warga, {
+// foreignKey: 'nama_wargaId',
+//     as: 'warga'
+// });
 
 
 
 export default Masuk;
+
+
+// Singkronisasi dengan basis data
+(async () => {
+    try {
+        await db.sync();
+        console.log("masuk table has been created.");
+    } catch (error) {
+        console.error("Unable to create the table:", error);
+    }
+})();

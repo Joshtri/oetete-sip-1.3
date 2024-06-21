@@ -28,3 +28,12 @@ export const dashboardPage = async(req,res)=>{
     });
     // console.log(totalWarga, totalKeluarga, totalKelahiran);
 };
+
+export const logoutUser = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: 'Failed to log out.' });
+        }
+        res.redirect('/');
+    });
+};
