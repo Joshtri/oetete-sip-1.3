@@ -13,3 +13,23 @@ Sistem Informasi Kependudukan Kelurahan Oetete adalah aplikasi berbasis web yang
 
 ## Struktur Proyek
 
+📦 Sistem-Informasi-Kependudukan-Kelurahan-Oetete
+├── 📂 public
+│ ├── 📂 css
+│ ├── 📂 js
+│ └── 📂 images
+├── 📂 routes
+│ ├── 📄 index.js
+│ └── 📄 users.js
+├── 📂 views
+│ ├── 📄 index.ejs
+│ ├── 📄 layout.ejs
+│ └── 📂 partials
+│ ├── 📄 header.ejs
+│ └── 📄 footer.ejs
+├── 📄 .gitignore
+├── 📄 app.js
+├── 📄 package.json
+├── 📄 README.md
+└── 📂 config
+└── 📄 database.js
