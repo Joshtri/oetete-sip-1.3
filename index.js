@@ -7,6 +7,7 @@ import { config } from 'dotenv';
 import session from 'express-session';
 import methodOverride from 'method-override';
 import mongoose from 'mongoose';
+import MongoStore from 'connect-mongo';
 // import mysql from 'mysql';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -57,12 +58,22 @@ const viewsDirectories = [
 app.set('views', viewsDirectories);
 app.set('view engine', 'ejs');
 app.use(flash({ sessionKeyName: 'flashMessage' }));
-app.use(session({
-  secret: 'login',
-  cookie: { maxAge: 3.24e+7 },  //more longer than before. 
-  saveUninitialized: false,
-  resave: true
-}));
+
+app.use(
+  session({
+    proxy: true,
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    name: 'oetete',
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI, // Replace with your MongoDB connection string
+      collectionName: 'sessions'
+    })  
+  
+    
+  })
+);
 
 // Method override middleware
 app.use(methodOverride('_method'));
@@ -79,9 +90,9 @@ app.use('/adm/data', keluargaRoute, wargaRoute, kelahiranRoute, kematianRoute, k
 // app.use('/statistics', statsRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
 
 // error handler
