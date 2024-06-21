@@ -5,53 +5,20 @@ Sistem Informasi Kependudukan Kelurahan Oetete adalah aplikasi berbasis web yang
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
 
 
-## Teknologi yang Digunakan
-
-- **Node.js** - v16.18.0
-- **Express.js** - 4.16.1
-- **Bootstrap** - 5.02
-- **EJS Template Engine**
-- **MySQL**
-- **Chart.js**
 
 
-### ⚙️ Teknologi Pengembangan
+### ⚙️ Teknologi yang Digunakan
 
--   Frontend :
+![Node.js](https://img.shields.io/badge/Node.js-20.13.1-green) 
+![Express.js](https://img.shields.io/badge/Express.js-4.19.2-blue)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.3-purple)
+![EJS](https://img.shields.io/badge/EJS-Template-orange)
+![Chart.js](https://img.shields.io/badge/Chart.js-4.4.3-yellow)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
+![Sequelize](https://img.shields.io/badge/Sequelize-ORM-blue)
 
-    ![javascript][javascript]
-    [![React][React.js]][React-url]
-    [![Tailwind][TailwindCSS]][Tailwind-url]
+###  License
 
--   Backend :
 
-    ![javascript][javascript]
-    ![Hyper-Express][Express-logo]
-    [![Node.js][NodeJS]][NodeJS-url]
 
--   Database :
-
-    [![MySQL][MySQL]][MySQL-url]
-
-## Struktur Proyek
-
-📦 Sistem-Informasi-Kependudukan-Kelurahan-Oetete
-├── 📂 public
-│ ├── 📂 css
-│ ├── 📂 js
-│ └── 📂 images
-├── 📂 routes
-│ ├── 📄 index.js
-│ └── 📄 users.js
-├── 📂 views
-│ ├── 📄 index.ejs
-│ ├── 📄 layout.ejs
-│ └── 📂 partials
-│ ├── 📄 header.ejs
-│ └── 📄 footer.ejs
-├── 📄 .gitignore
-├── 📄 app.js
-├── 📄 package.json
-├── 📄 README.md
-└── 📂 config
-└── 📄 database.js
+![License](https://img.shields.io/badge/License-MIT-yellow)
