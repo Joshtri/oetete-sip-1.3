@@ -19,6 +19,11 @@
         .custom-table th {
             font-size: 14px; /* Adjust the font size as needed */
         }
+
+        #current-time {
+          font-size: 0.875rem; /* Sesuaikan ukuran font sesuai kebutuhan */
+          color: #000; /* Sesuaikan warna teks sesuai kebutuhan */
+      }
     </style>
 
     <style>
@@ -32,12 +37,14 @@
 
 
     <div class="container mt-3">
-        <nav aria-label="breadcrumb" class="small">
-            <ol class="breadcrumb">
+        <nav aria-label="breadcrumb" class="small d-flex justify-content-between">
+            <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="/adm/dashboard"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
                 <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
                 <li class="breadcrumb-item active" aria-current="page"><%= title %></li>
             </ol>
+
+            <div id="current-time" class="align-self-center"></div>
         </nav>
         <hr>
 
@@ -101,8 +108,16 @@
 
         <div class="d-flex justify-content-between">
             <a href="/adm/data/add_warga" class="btn btn-sm btn-warning">Tambah Data</a>
-            <input class="form-control w-25" type="text" id="searchInput" placeholder="Search">
+            <!-- <input type="text" class="form-control" id="search-bar" placeholder="Cari..."> -->
+            <input class="form-control w-25" type="text" id="search-bar" placeholder="Cari...">
+
         </div>
+
+
+        <!-- only temporary code here. -->
+
+        <!-- No Data Message -->
+        <!-- <div id="no-data-message" style="display: none;">No data found</div> -->
 
         <div class="container mt-3">
             <table class="table table-sm table-hover custom-table" id="data-table-view">
@@ -150,6 +165,7 @@
                 </tbody>
             </table>
             
+            <!-- No Data Message -->
             <div id="no-data-message" class="alert alert-danger rounded mt-3 text-center" style="display: none;">
                 Data tidak ditemukan<i class="mx-1 fs-5 fa-brands fa-searchengin fa-bounce"></i>
             </div>
@@ -244,37 +260,41 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.add-to-masuk-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.add-to-masuk-btn').forEach(button => {
+              button.addEventListener('click', function(e) {
+                  e.preventDefault();
 
-                const id_warga = this.getAttribute('data-id_warga');
+                  const id_warga = this.getAttribute('data-id_warga');
 
-                axios.get(`/adm/data/add_to_masuk/${id_warga}`)
-                .then(response => {
-                    // Populate the modal with the rendered HTML
-                    document.getElementById('modalContent').innerHTML = response.data;
+                  axios.get(`/adm/data/add_to_masuk/${id_warga}`)
+                  .then(response => {
+                      // Populate the modal with the rendered HTML
+                      document.getElementById('modalContent').innerHTML = response.data;
 
-                    // Show the modal
-                    const modal = new bootstrap.Modal(document.getElementById('addToMasukModal'));
-                    modal.show();
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert('Failed to fetch data. Please try again.');
-                });
-            });
-        });
+                      // Show the modal
+                      const modal = new bootstrap.Modal(document.getElementById('addToMasukModal'));
+                      modal.show();
+                  })
+                  .catch(error => {
+                      console.error(error);
+                      alert('Failed to fetch data. Please try again.');
+                  });
+              });
+          });
 
-        document.getElementById('uploadButton').addEventListener('click', function() {
-            alert('Upload logic to be implemented.');
-        });
-    });
-</script>
+          document.getElementById('uploadButton').addEventListener('click', function() {
+              alert('Upload logic to be implemented.');
+          });
+      });
+  </script>
 
-    <script src="/js/tooltip.js"></script>
+  <!-- <script src="/js/liveSearchBar.js"></script> -->
+
+  <script src="/js/tooltip.js"></script>
+
+  <script src="/js/features.js"></script>
 
 </body>
 </html>

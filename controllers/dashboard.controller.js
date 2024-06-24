@@ -37,3 +37,20 @@ export const logoutUser = (req, res) => {
         res.redirect('/');
     });
 };
+
+
+export const informasiAkunPage = (req,res)=>{
+    const title = "Informasi Akun";
+    try {
+        const user = req.session.user;
+
+        console.log(user);
+
+        res.render('informasi_akun',{
+            title,
+            user
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};

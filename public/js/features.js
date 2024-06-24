@@ -1,3 +1,9 @@
+// ALL FEATURE IS HERE.
+
+
+
+
+//live search bar features.
 const searchBar = document.querySelector('#search-bar');
 const tableRows = document.querySelectorAll('#data-table-view tbody tr');
 const noDataMessage = document.getElementById('no-data-message');
@@ -29,3 +35,24 @@ if (!dataFound) {
     paginationButtons.style.display = 'block';
 }
 });
+
+
+
+
+
+
+//time clock feature.
+function updateTime() {
+    const currentTimeElement = document.getElementById('current-time');
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    currentTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Perbarui waktu setiap detik
+setInterval(updateTime, 1000);
+
+// Inisialisasi waktu saat halaman dimuat
+updateTime();

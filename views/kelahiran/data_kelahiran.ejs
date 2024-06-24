@@ -20,15 +20,22 @@
         .custom-table th {
             font-size: 14px; /* Adjust the font size as needed */
         }
+
+        #current-time {
+          font-size: 0.875rem; /* Sesuaikan ukuran font sesuai kebutuhan */
+          color: #000; /* Sesuaikan warna teks sesuai kebutuhan */
+      }
     </style>
 
     <div class="container mt-3">
-        <nav aria-label="breadcrumb" class="small">
-            <ol class="breadcrumb">
+        <nav aria-label="breadcrumb" class="small d-flex justify-content-between">
+            <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="/adm/dashboard"><i class="fa-solid fa-house me-1"></i>Dashboard</a></li>
                 <!-- <li class="breadcrumb-item"><a href="#">Data</a></li> -->
                 <li class="breadcrumb-item active" aria-current="page"><%= title %></li>
+                
             </ol>
+            <div id="current-time" class="align-self-center"></div>
         </nav>
         <hr>
 
@@ -91,7 +98,7 @@
 
         <div class="d-flex justify-content-between">
             <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#tambahKelahiranModal">Tambah Data</button>
-            <input class="form-control w-25" type="text" id="searchInput" placeholder="Search">
+            <input class="form-control w-25" type="text" id="search-bar" placeholder="Cari...">
         </div>
 
         <div class="container mt-3">
@@ -204,6 +211,8 @@
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>  
   <script src="/js/tooltip.js"></script>
+
+  <script src="/js/features.js"></script>
   
 </body>
 </html>
