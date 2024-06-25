@@ -6,7 +6,7 @@ import { dashboardPage, informasiAkunPage, logoutUser } from "../controllers/das
 
 
 router.get('/dashboard',protect, dashboardPage);
-router.get('/logout', logoutUser);
+router.get('/logout', protect, logoutUser);
 
 
 router.get('/main/informasi_akun', informasiAkunPage);

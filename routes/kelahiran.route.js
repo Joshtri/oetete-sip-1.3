@@ -3,6 +3,7 @@ const router = express.Router();
 import protect from "../config/auth/protect.js";
 import {  createKelahiran, deleteKelahiran, getKelahiranById, getKelahiranByIdEdit, kelahiranPage, updateKelahiran } from "../controllers/kelahiran.controller.js";
 
+
 router.get('/kelahiran',protect, kelahiranPage);
 router.post('/post_kelahiran',protect, createKelahiran);
 router.delete('/kelahiran/:id', protect,deleteKelahiran);

@@ -45,6 +45,13 @@
       </nav>
       <hr>
 
+      <% messageDeleteError.forEach(element => { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= element %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% }) %>
+      
       <!-- toast tambah data berhasil. -->
       <% messageCreateSuccess.forEach(element => { %>
       <div class="toast-container top-0 end-0 p-3">

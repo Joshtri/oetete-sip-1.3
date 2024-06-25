@@ -39,6 +39,7 @@ export const keluargaPage = async (req, res) => {
       const messageCreateSuccess = await req.flash('messageCreateSuccess');
       const messageDeleteSuccess = await req.flash('messageDeleteSuccess');
       const messageUpdateSuccess = await req.flash('messageUpdateSuccess');
+      const messageDeleteError = await req.flash('messageDeleteError');
 
       res.render('data_keluarga', {
           title,
@@ -49,7 +50,8 @@ export const keluargaPage = async (req, res) => {
           messageCreateSuccess,
           messageDeleteSuccess,
           messageUpdateSuccess,
-          limit
+          limit,
+          messageDeleteError
       });
   } catch (error) {
       console.error(error);
@@ -72,7 +74,10 @@ export const deleteKeluarga = async (req, res) => {
       }
   } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
+      await req.flash('messageDeleteError', 'Tidak dapat menghapus data karena ada data yang berelasi.');
+
+      res.redirect('/adm/data/kartu_keluarga');
+      // res.status(500).send("Internal Server Error");
   }
 };
 
