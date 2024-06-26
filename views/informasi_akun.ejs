@@ -268,7 +268,7 @@
                 countdownElement.textContent = countdown;
                 if (countdown === 0) {
                     clearInterval(countdownInterval);
-                    window.location.href = '/logout';
+                    window.location.href = '/adm/logout';
                 }
             }, 1000);
         }
@@ -289,7 +289,7 @@ function deleteUser(userId) {
         })
         .then(result => {
             alert('Akun berhasil dihapus');
-            window.location.href = '/logout'; // Arahkan pengguna ke halaman logout setelah berhasil menghapus akun
+            window.location.href = '/adm/logout'; // Arahkan pengguna ke halaman logout setelah berhasil menghapus akun
         })
         .catch(error => {
             console.error('Error:', error);

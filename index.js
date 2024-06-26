@@ -2,21 +2,16 @@ import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
 import flash from 'connect-flash';
-
 import { config } from 'dotenv';
 import session from 'express-session';
 import methodOverride from 'method-override';
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
-// import mysql from 'mysql';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
-
 import mongoDbConnect from './config/dbSessionConfig.js';
 
 config();
-
 mongoDbConnect();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,15 +28,8 @@ import masukRoute from './routes/masuk.route.js';
 import statisticRoute from './routes/statistic.route.js';
 import userRoute from './routes/user.route.js';
 
-// import usersRouter from './routes/users.mjs';
-// import addRouter from './routes/add.mjs';
-// import statsRouter from './routes/stats.mjs';
-// import datasRouter from './routes/data.mjs';
-
 const app = express();
 const port = process.env.PORT || "3001";
-
-
 
 // Tentukan lokasi folder views
 const viewsDirectories = [
@@ -71,9 +59,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI, // Replace with your MongoDB connection string
       collectionName: 'sessions'
-    })  
-  
-    
+    })
   })
 );
 
@@ -84,28 +70,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRoute);  // most top level sitemap. 
-app.use('/adm', dashboardRoute, statisticRoute);  // most top level sitemap. 
-app.use('/adm/data', keluargaRoute, wargaRoute, kelahiranRoute, kematianRoute, keluarRoute, masukRoute,userRoute);
-// app.use('/users', usersRouter);
-// app.use('/tambah_data', addRouter);
-// app.use('/statistics', statsRouter);
+app.use('/', indexRoute);
+app.use('/adm', dashboardRoute, statisticRoute);
+app.use('/adm/data', keluargaRoute, wargaRoute, kelahiranRoute, kematianRoute, keluarRoute, masukRoute, userRoute);
 
-// catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
+// Middleware untuk menangani kesalahan 404
+app.use((req, res, next) => {
+  res.status(404);
+  res.render('error', {
+    message: 'Page Not Found',
+    error: { status: 404 }
+  });
+});
 
-
-// error handler
-// app.use(function (err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+// Middleware untuk menangani kesalahan server
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+  });
+});
 
 app.listen(port, () => console.log(`listening on ${port}`));

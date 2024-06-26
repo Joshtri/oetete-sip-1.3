@@ -33,7 +33,7 @@
                         <select class="form-select" id="nama_kepala_keluarga" name="nama_kepala_keluarga" required>
                             <option value="">-</option>
                             <% for(let i = 0; i < keluargaData.length; i++) { %>
-                                <option value="<%= keluargaData[i].id_keluarga %>"><%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %></option>
+                                <option value="<%= keluargaData[i].nama_kepala_keluarga %>"><%= keluargaData[i].nama_kepala_keluarga %> - <%= keluargaData[i].nomor_kartu_keluarga %></option>
                               <% } %>
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                     
                     <div class="mb-3">
                         <label for="alamat_sebelumnya" class="form-label">Alamat Sebelumnya</label>
-                        <input type="date" class="form-control" id="alamat_sebelumnya" name="alamat_sebelumnya" required>
+                        <input type="text" class="form-control" id="alamat_sebelumnya" name="alamat_sebelumnya" required>
                     </div>
                 
             </div>
