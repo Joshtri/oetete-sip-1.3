@@ -31,6 +31,7 @@ import kematianRoute from './routes/kematian.route.js';
 import keluarRoute from './routes/keluar.route.js';
 import masukRoute from './routes/masuk.route.js';
 import statisticRoute from './routes/statistic.route.js';
+import userRoute from './routes/user.route.js';
 
 // import usersRouter from './routes/users.mjs';
 // import addRouter from './routes/add.mjs';
@@ -52,6 +53,7 @@ const viewsDirectories = [
   path.join(__dirname, 'views', 'keluar'),
   path.join(__dirname, 'views', 'masuk'),
   path.join(__dirname, 'views', 'stats'),
+  path.join(__dirname, 'views', 'user'),
 ];
 
 // view engine setup
@@ -84,7 +86,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRoute);  // most top level sitemap. 
 app.use('/adm', dashboardRoute, statisticRoute);  // most top level sitemap. 
-app.use('/adm/data', keluargaRoute, wargaRoute, kelahiranRoute, kematianRoute, keluarRoute, masukRoute);
+app.use('/adm/data', keluargaRoute, wargaRoute, kelahiranRoute, kematianRoute, keluarRoute, masukRoute,userRoute);
 // app.use('/users', usersRouter);
 // app.use('/tambah_data', addRouter);
 // app.use('/statistics', statsRouter);

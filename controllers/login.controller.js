@@ -13,17 +13,26 @@ export const loginUser = async (req, res) => {
         req.session.user = user;
         res.redirect('/adm/dashboard');
     } catch (error) {
-        res.status(401).json({ message: "Login failed", error: error.message });
+
+        // Login gagal, berikan pesan error
+        await req.flash('messageProtect', 'Username atau password salah.');
+        res.redirect('/');
+        console.log(error);
+        // res.status(401).json({ message: "Login failed", error: error.message });
     }
 };
 
 
 export const loginPage = async(req,res)=>{
+    const title = "Login";
 
     try {
-        const title = "Login";
+
+        const messageProtect = await req.flash('messageProtect');
+
         res.render('index',{
-            title
+            title,
+            messageProtect
         });
     } catch (error) {
         throw error;

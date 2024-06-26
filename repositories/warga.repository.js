@@ -35,14 +35,14 @@ export const getAllWarga = async (offset, limit) => {
     }
 };
 
-// Fungsi untuk mendapatkan total data Warga
+// Fungsi untuk mendapatkan total data Warga dengan status hidup
 export const getTotalWarga = async () => {
-    try {
-        const totalWarga = await Warga.count();
-        return totalWarga;
-    } catch (error) {
-        throw error;
-    }
+  try {
+      const totalWargaHidup = await Warga.count({ where: { status_warga: 'hidup' } });
+      return totalWargaHidup;
+  } catch (error) {
+      throw error;
+  }
 };
 
 
